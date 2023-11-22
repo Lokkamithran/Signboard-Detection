@@ -17,12 +17,12 @@ for img in imgs:
 #    print(image.size)
    data.append(np.array(image))
 X_test=np.array(data)
-print(X_test.shape)
+# print(X_test.shape)
 # pred = model.predict_classes(X_test)
 predict_x=model.predict(X_test)
 classes_x=np.argmax(predict_x,axis=1)
 
 #Accuracy with the test data
 from sklearn.metrics import accuracy_score
-print(accuracy_score(labels, classes_x))
+print("Accuracy", accuracy_score(labels, classes_x))
 # model.save('traffic_classifier.h5')
