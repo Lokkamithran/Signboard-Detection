@@ -1,14 +1,12 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
-import pandas as pd
 from PIL import ImageTk, Image
 import numpy
-
-#load the trained model to classify sign
 from keras.models import load_model
+
 model = load_model('traffic_classifier.h5')
-#dictionary to label all traffic signs class.
+
 classes = { 1:'Speed limit (20km/h)',
            2:'Speed limit (30km/h)',
            3:'Speed limit (50km/h)',
@@ -60,9 +58,7 @@ top.title('Traffic sign classification')
 top.configure(background='#CDCDCD')
 label=Label(top,background='#CDCDCD', font=('arial',15,'bold'))
 sign_image = Label(top)
-# y_test = pd.read_csv('Test.csv')
-# labels = y_test["ClassId"].values
-# imgs = y_test["Path"].values
+
 def classify(file_path):
    global label_packed
    image = Image.open(file_path)
@@ -73,7 +69,9 @@ def classify(file_path):
    X_test=numpy.array(data)
 
    predict_x=model.predict(X_test)
+#    print("Predict_X", predict_x)
    classes_x=numpy.argmax(predict_x,axis=1)
+#    print("Classes_X", classes_x)
 
    sign = classes[classes_x[0]+1]
    print(sign)
